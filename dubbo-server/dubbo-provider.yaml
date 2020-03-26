@@ -15,20 +15,30 @@ spec:
       - name: dubbo-provider
         image: dubbo-provider:v1.0.0
         ports:
-        - containerPort: 8082
+        - containerPort: 30000
 
 ---
 apiVersion: v1
 kind: Service
 metadata: 
   name: dubbo-provider-service
+#spec:
+#  type: ClusterIP
+#  selector:
+#    app: dubbo-provider
+#  ports:
+#  - protocol: TCP
+#    port: 20000
+#    targetPort: 20000
+#    name: dubbo-provider
+#  clusterIP: None
 spec:
-  type: ClusterIP
   selector:
     app: dubbo-provider
+  type: NodePort
   ports:
   - protocol: TCP
-    port: 8082
-    targetPort: 8082
+    port: 30000
+    nodePort: 30000
+    targetPort: 30000
     name: dubbo-provider
-  clusterIP: None
