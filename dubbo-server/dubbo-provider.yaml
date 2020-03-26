@@ -1,0 +1,34 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: dubbo-provider
+  labels:
+    app: dubbo-provider
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: dubbo-provider
+    spec:
+      containers:
+      - name: dubbo-provider
+        image: dubbo-provider:v1.0.0
+        ports:
+        - containerPort: 8082
+
+---
+apiVersion: v1
+kind: Service
+metadata: 
+  name: dubbo-provider-service
+spec:
+  type: ClusterIP
+  selector:
+    app: dubbo-provider
+  ports:
+  - protocol: TCP
+    port: 8082
+    targetPort: 8082
+    name: dubbo-provider
+  clusterIP: None
