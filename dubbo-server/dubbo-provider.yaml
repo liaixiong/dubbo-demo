@@ -5,15 +5,23 @@ metadata:
   labels:
     app: dubbo-provider
 spec:
-  replicas: 1
+  replicas: 2 
   template:
     metadata:
       labels:
         app: dubbo-provider
     spec:
       containers:
-      - name: dubbo-provider
+      - env:
+        - name: DUBBO_IP_TO_REGISTRY
+          valueFrom:
+            fieldRef:
+              fieldPath: status.hostIP
+        - name: DUBBO_PORT_TO_REGISTRY
+          value: "30000"
         image: dubbo-provider:v1.0.0
+        name: dubbo-provider
         ports:
         - containerPort: 30000
+          protocol: TCP
 
