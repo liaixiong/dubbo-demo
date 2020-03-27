@@ -9,10 +9,12 @@ import com.llf.dubbo.service.HelloDubboService;
  * @Description:
  * @date: 2019/1/17 15:13
  */
+
 @Service(version = "1.0.0")
 public class HelloDubboServiceImpl implements HelloDubboService {
 
     public HelloDto getHello(Long id) {
+        System.out.println("====> [dubbo provider]: call from consumer, id = " + id);
         HelloDto helloDto = new HelloDto();
         helloDto.setId(id);
         helloDto.setContent("Hello, handsome");
