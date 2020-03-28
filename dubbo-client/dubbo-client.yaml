@@ -1,0 +1,20 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: dubbo-consumer
+  labels:
+    app: dubbo-consumer
+spec:
+  replicas: 1 
+  template:
+    metadata:
+      labels:
+        app: dubbo-consumer
+    spec:
+      containers:
+      - name: dubbo-consumer
+        image: dubbo-consumer:v1.0.0
+        ports:
+        - containerPort: 8082
+          protocol: TCP
+
